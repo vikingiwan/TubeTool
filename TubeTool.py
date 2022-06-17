@@ -4,7 +4,31 @@
 ##########################################
 
 from __future__ import unicode_literals
+from ast import AsyncFunctionDef
+from xml.etree.ElementTree import VERSION
 import youtube_dl
+
+
+def setup():
+    global VERSION
+    VERSION = '1.0.0'
+    global author
+    author = "VikingIwan"
+    global banner
+    banner = '''
+    ##########################################
+    #  _______    _       _______          _  #
+    # |__   __|  | |     |__   __|        | | #
+    #    | |_   _| |__   ___| | ___   ___ | | #
+    #    | | | | | '_ \ / _ \ |/ _ \ / _ \| | #
+    #    | | |_| | |_) |  __/ | (_) | (_) | | #
+    #    |_|\__,_|_.__/ \___|_|\___/ \___/|_| #
+    #                                         #
+    ###########################################
+    
+                By: VikingIwan
+
+    '''
 
 
 class TLogger(object):
@@ -40,6 +64,8 @@ def dlAudio(link):
 
 
 def main():
+    print(banner)
+
     link = input("Enter the link: ")
     dlAudio(link)
 

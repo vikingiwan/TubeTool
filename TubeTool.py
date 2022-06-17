@@ -73,8 +73,8 @@ def dlAudio(link):
             'preferredquality': '192',
         }],
         'outtmpl': 'Downloads/Audio/%(title)s.%(ext)s',
-        # 'logger': TLogger(),
-        # 'progress_hooks': [Thook],
+        'logger': TLogger(),
+        'progress_hooks': [Thook],
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([link])
@@ -82,14 +82,14 @@ def dlAudio(link):
 
 def dlVideo(link):
     ydl_opts = {
-        'format': 'bestvideo/best',
+        'format': 'bestvideo*+bestaudio/best',
         'postprocessors': [{
             'key': 'FFmpegVideoConvertor',
             'preferedformat': 'mp4'
         }],
         'outtmpl': 'Downloads/Video/%(title)s.%(ext)s',
-        # 'logger': TLogger(),
-        # 'progress_hooks': [Thook],
+        'logger': TLogger(),
+        'progress_hooks': [Thook],
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([link])
@@ -122,9 +122,11 @@ def main():
         if mode == "video":
             print("Downloading as video (mp4). This may take some time.")
             dlVideo(link)
+            print("Download complete.")
         elif mode == "audio":
             print("Downloadin as Audio (mp3). This may take some time.")
             dlAudio(link)
+            print("Download complete.")
 
 
 setup()

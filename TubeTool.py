@@ -7,6 +7,8 @@ from __future__ import unicode_literals
 from ast import AsyncFunctionDef
 from xml.etree.ElementTree import VERSION
 import youtube_dl
+import os
+import time
 
 
 def setup():
@@ -29,6 +31,10 @@ def setup():
                 By: VikingIwan
 
     '''
+
+
+def cls():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 
 class TLogger(object):
@@ -64,10 +70,31 @@ def dlAudio(link):
 
 
 def main():
+    cls()
     print(banner)
 
-    link = input("Enter the link: ")
-    dlAudio(link)
+    link = input("Enter the Youtube link you would like to download: ")
+    print("To download as Video, enter 1. To download as Audio, enter 2.")
+    _c = input("Choice: ")
+    mode = ""
+
+    if _c == "1":
+        mode = "video"
+    elif _c == "2":
+        mode = "audio"
+    else:
+        mode = "error"
+
+    if mode == "error" or "":
+        print("ERROR: UNKNOWN INPUT. PLEASE MAKE SURE YOU ENTER 1 OR 2.")
+        print("Restarting application...")
+        time.sleep(5)
+        main()
+    else:
+        print("Chosen mode: " + mode)
+
+    # dlAudio(link)
 
 
+setup()
 main()

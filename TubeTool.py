@@ -5,8 +5,10 @@
 
 from __future__ import unicode_literals
 from ast import AsyncFunctionDef
+from distutils.debug import DEBUG
 from xml.etree.ElementTree import VERSION
-import youtube_dl
+#import youtube_dl
+import yt_dlp
 import os
 import time
 
@@ -14,6 +16,10 @@ import time
 def setup():
     global VERSION
     VERSION = '1.0.0'
+
+    global DEBUG
+    DEBUG = True
+
     global author
     author = "VikingIwan"
     global banner
@@ -35,6 +41,11 @@ def setup():
 
 def cls():
     os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def debug(msg):
+    if DEBUG == True:
+        print("DEBUG: " + msg)
 
 
 class TLogger(object):
@@ -65,7 +76,22 @@ def dlAudio(link):
         'logger': TLogger(),
         'progress_hooks': [Thook],
     }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        ydl.download([link])
+
+
+def dlVideo(link):
+    ydl_opts = {
+        'format': 'bestvideo*+bestaudio/best',
+        'postprocessors': [{
+            'key': 'FFmpegVideoConvertor',
+            'preferedformat': 'mp4'
+        }],
+        'outtmpl': 'Downloads/Video/%(title)s.%(ext)s',
+        'logger': TLogger(),
+        'progress_hooks': [Thook],
+    }
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([link])
 
 
@@ -91,9 +117,16 @@ def main():
         time.sleep(5)
         main()
     else:
-        print("Chosen mode: " + mode)
-
-    # dlAudio(link)
+        debug("Chosen mode: " + mode)
+        print("")
+        if mode == "video":
+            print("Downloading as video (mp4). This may take some time.")
+            dlVideo(link)
+            print("Download complete.")
+        elif mode == "audio":
+            print("Downloadin as Audio (mp3). This may take some time.")
+            dlAudio(link)
+            print("Download complete.")
 
 
 setup()

@@ -120,6 +120,8 @@ def main():
             print("Downloading as video (mp4). This may take some time.")
             dlVideo(link)
             print("Download complete.")
+            if input("Would you like to download another? (y/n)") == "y":
+                main()
             if os.name == 'nt':
                 Folder = os.getcwd() + "\\Downloads\\Video"
                 os.path.realpath(Folder)
@@ -128,6 +130,8 @@ def main():
             print("Downloading as Audio (mp3). This may take some time.")
             dlAudio(link)
             print("Download complete.")
+            if input("Would you like to download another? (y/n)") == "y":
+                main()
             if os.name == 'nt':
                 Folder = os.getcwd() + "\\Downloads\\Audio"
                 os.path.realpath(Folder)

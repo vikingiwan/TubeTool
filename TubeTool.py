@@ -7,7 +7,8 @@ from __future__ import unicode_literals
 from ast import AsyncFunctionDef
 from distutils.debug import DEBUG
 from xml.etree.ElementTree import VERSION
-import youtube_dl
+#import youtube_dl
+import yt_dlp
 import os
 import time
 
@@ -75,7 +76,7 @@ def dlAudio(link):
         # 'logger': TLogger(),
         # 'progress_hooks': [Thook],
     }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([link])
 
 
@@ -90,7 +91,7 @@ def dlVideo(link):
         # 'logger': TLogger(),
         # 'progress_hooks': [Thook],
     }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         ydl.download([link])
 
 

@@ -7,7 +7,6 @@ from __future__ import unicode_literals
 from ast import AsyncFunctionDef
 from distutils.debug import DEBUG
 from xml.etree.ElementTree import VERSION
-#import youtube_dl
 import yt_dlp
 import os
 import time

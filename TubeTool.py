@@ -19,11 +19,9 @@ def setup():
     global DEBUG
     DEBUG = True
 
-    global author
-    author = "VikingIwan"
     global banner
     banner = '''
-    ##########################################
+    ###########################################
     #  _______    _       _______          _  #
     # |__   __|  | |     |__   __|        | | #
     #    | |_   _| |__   ___| | ___   ___ | | #
@@ -60,7 +58,7 @@ class TLogger(object):
 
 def Thook(d):
     if d['status'] == 'finished':
-        print('Download complete. Starting conversion ...')
+        print('Starting conversion ...')
 
 
 def dlAudio(link):
@@ -122,10 +120,18 @@ def main():
             print("Downloading as video (mp4). This may take some time.")
             dlVideo(link)
             print("Download complete.")
+            if os.name == 'nt':
+                Folder = os.getcwd() + "\\Downloads\\Video"
+                os.path.realpath(Folder)
+                os.startfile(Folder)
         elif mode == "audio":
-            print("Downloadin as Audio (mp3). This may take some time.")
+            print("Downloading as Audio (mp3). This may take some time.")
             dlAudio(link)
             print("Download complete.")
+            if os.name == 'nt':
+                Folder = os.getcwd() + "\\Downloads\\Audio"
+                os.path.realpath(Folder)
+                os.startfile(Folder)
 
 
 setup()
